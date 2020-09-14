@@ -1,5 +1,5 @@
 {
-  "port": 5000,
+  "port": 80,
   "mongoURI": "mongodb+srv://d3m1:Nevermor3@cluster0.ykqur.mongodb.net/app?retryWrites=true&w=majority",
   "jwtSecret": "d3m1 is best programmer",
   "baseUrl": "http://localhost:5000"

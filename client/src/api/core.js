@@ -13,7 +13,6 @@ export const setToken = (accessToken, tokenType) => {
 }
 
 export const request = (path, params = {}, auth = true) => {
-
   const requestParameters = auth
     ? {
       ...params,

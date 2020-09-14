@@ -11,6 +11,6 @@ export const login = ({ email, password }) => request(
   { method: 'POST', data: { email, password } },
   false,
 ).then(data => {
-  setToken(data.tokenHolder.accessToken, data.tokenHolder.tokenType)
+  setToken(data.token, 'Bearer')
   return data
 })

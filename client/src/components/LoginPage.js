@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }), { name: 'AuthPage' });
 
-const AuthPage = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
   const classes = useStyles();
@@ -122,4 +122,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default LoginPage;

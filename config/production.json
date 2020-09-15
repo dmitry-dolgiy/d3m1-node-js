@@ -2,5 +2,5 @@
   "port": 80,
   "mongoURI": "mongodb+srv://d3m1:Nevermor3@cluster0.ykqur.mongodb.net/app?retryWrites=true&w=majority",
   "jwtSecret": "d3m1 is best programmer",
-  "baseUrl": "https://local-chalice-289623.oa.r."
+  "baseUrl": "http://d3m1.tech"
 }

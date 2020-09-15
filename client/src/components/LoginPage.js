@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   formContainer: {
     margin: theme.spacing(10, 10, 0, 0),
+    maxWidth: 350,
   },
   imgContainer: {
     margin: theme.spacing(10, 0, 0, 10),
@@ -36,12 +37,15 @@ const useStyles = makeStyles(theme => ({
   },
   field: {
     marginBottom: theme.spacing(4),
-    maxWidth: 350,
   },
   loginButton: {
-    maxWidth: 110,
+    minWidth: 160,
     height: 50,
     backgroundColor: '#6dabe4'
+  },
+  loginHeader: {
+    fontWeight: 'bold',
+    marginBottom: 25,
   }
 }), { name: 'AuthPage' });
 
@@ -69,7 +73,7 @@ const LoginPage = () => {
             </div>
           </Grid>
           <Grid container item md className={classes.formContainer} direction="column">
-            <Typography variant="h1">Sign in</Typography>
+            <Typography className={classes.loginHeader} variant="h1">Sign in</Typography>
 
             <FormControl fullWidth className={classes.field}>
               <Input
@@ -99,22 +103,24 @@ const LoginPage = () => {
               />
             </FormControl>
 
-            <Button
-              className={classes.loginButton}
-              variant="contained"
-              color="primary"
-              onClick={() => dispatch(loginUser(form))}
-            >
-              Log in
-            </Button>
-            <Button
-              className={classes.loginButton}
-              variant="contained"
-              color="primary"
-              onClick={() => dispatch(registerUser(form))}
-            >
-              REG
-            </Button>
+            <Grid container item justify="space-between">
+              <Button
+                className={classes.loginButton}
+                variant="contained"
+                color="primary"
+                onClick={() => dispatch(loginUser(form))}
+              >
+                Log in
+              </Button>
+              <Button
+                className={classes.loginButton}
+                variant="contained"
+                color="primary"
+                onClick={() => dispatch(registerUser(form))}
+              >
+                REG
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>

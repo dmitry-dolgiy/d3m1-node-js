@@ -26,12 +26,12 @@ const INITIAL_STATE = {
 
 export const loginUser = user => ({ type: LOGIN_USER, user });
 export const loginUserSuccess = ({ userId, token }) => ({ type: LOGIN_USER_SUCCESS, userId, token });
-export const loginUserFailure = (error) => ({ type: LOGIN_USER_FAILURE, error });
+export const loginUserFailure = error => ({ type: LOGIN_USER_FAILURE, error });
 export const logout = () => ({ type: LOGOUT });
 
-export const registerUser = (user) => ({ type: REGISTER_USER, user });
-export const registerUserSuccess = (currentUser) => ({ type: REGISTER_USER_SUCCESS, currentUser });
-export const registerUserFailure = (error) => ({ type: REGISTER_USER_FAILURE, error });
+export const registerUser = user => ({ type: REGISTER_USER, user });
+export const registerUserSuccess = userId => ({ type: REGISTER_USER_SUCCESS, userId });
+export const registerUserFailure = error => ({ type: REGISTER_USER_FAILURE, error });
 
 export const setAuthorizationError = (error) => ({ type: SET_AUTHORIZATION_ERROR, error });
 export const clearAuthorizationError = () => ({ type: CLEAR_AUTHORIZATION_ERROR });
@@ -69,6 +69,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false,
+        userId: action.userId,
       };
     case REGISTER_USER_FAILURE:
       return {
@@ -91,6 +92,7 @@ export const getAuthorizationError = state => getAuth(state).authorizationError
 export const getHasAuthorizationError = state => Boolean(getAuthorizationError(state))
 export const getAccessToken = state => getAuth(state).token
 export const isAuthenticated = state => Boolean(getAccessToken(state))
+export const getIsLoading = state => getAuth(state).isLoading
 
 export function* loginUserSaga({ user }) {
   try {
@@ -103,8 +105,8 @@ export function* loginUserSaga({ user }) {
 
 export function* registerUserSaga({ user }) {
   try {
-    const currentUser = yield* requestAPI(API.register, user);
-    yield put(registerUserSuccess(currentUser));
+    const { userId } = yield* requestAPI(API.register, user);
+    yield put(registerUserSuccess(userId));
   } catch (error) {
     yield put(registerUserFailure(error));
   }

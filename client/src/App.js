@@ -3,8 +3,9 @@ import { CssBaseline, makeStyles } from '@material-ui/core';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomePage from "./components/HomePage";
-import Auth from "./components/Auth";
+import Auth from "./components/auth/Auth";
 import TokenWatcher from "./components/TokenWatcher";
+import Registration from "./components/register/Registration";
 
 const useStyles = makeStyles(theme => ({
   page: {
@@ -23,9 +24,8 @@ const App = () => {
       <BrowserRouter>
         <div className={classes.page}>
           <Switch>
-            {/*<Route component={NoPermissionPage} path="/403" />*/}
-            {/*<Route component={Registration} path="/register" />*/}
             <Route component={Auth} path="/auth"/>
+            <Route component={Registration} path="/register" />
             <Route component={HomePage} path="/"/>
           </Switch>
         </div>

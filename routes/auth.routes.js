@@ -14,7 +14,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { body: { email, password } } = req
+      const { body: { email, password, name } } = req
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
@@ -30,10 +30,10 @@ router.post(
       }
 
       const hashedPassword = await bcrypt.hash(password, 12)
-      const user = new User({ email, password: hashedPassword })
+      const user = new User({ email, name, password: hashedPassword })
       await user.save()
 
-      res.status(201).json({ message: 'Пользователь создан' })
+      res.status(201).json({ userId: user.id, message: 'Пользователь создан' })
     } catch (e) {
       res.status(500).json({ message: 'Something went wrong' })
     }

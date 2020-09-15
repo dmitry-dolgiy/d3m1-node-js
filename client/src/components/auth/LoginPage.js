@@ -1,13 +1,13 @@
 import { Grid, makeStyles, Paper, Typography, Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import SignInImage from '../assets/signin-image.jpg'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import SignInImage from '../../assets/signin-image.jpg'
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Person, Lock } from '@material-ui/icons';
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
-import { loginUser, registerUser } from "../store/duck/authenticate"
+import { getIsLoading, loginUser, registerUser } from "../../store/duck/authenticate"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     height: 19,
   },
   field: {
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(6),
   },
   loginButton: {
     minWidth: 160,
@@ -46,13 +46,16 @@ const useStyles = makeStyles(theme => ({
   loginHeader: {
     fontWeight: 'bold',
     marginBottom: 25,
+  },
+  accountContainer: {
+    paddingLeft: 55,
   }
 }), { name: 'AuthPage' });
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const { push } = useHistory();
   const classes = useStyles();
+  const isLoading = useSelector(getIsLoading)
 
   const [form, setForm] = useState({ email: '', password: '' })
   const handleOnChange = ({ target: { name, value } }) => setForm({ ...form, [name]: value })
@@ -67,10 +70,10 @@ const LoginPage = () => {
       <Paper elevation={3} className={classes.paper}>
         <Grid className={classes.loginContainer} container>
           <Grid container item md className={classes.imgContainer}>
-            <div className="signin-image">
-              <img src={SignInImage} alt="sing up image"/>
-
-            </div>
+            <img src={SignInImage}/>
+            <Grid className={classes.accountContainer} container alignItems="center">
+              <Link to="/register">Create an account</Link>
+            </Grid>
           </Grid>
           <Grid container item md className={classes.formContainer} direction="column">
             <Typography className={classes.loginHeader} variant="h1">Sign in</Typography>
@@ -105,20 +108,13 @@ const LoginPage = () => {
 
             <Grid container item justify="space-between">
               <Button
+                disabled={isLoading}
                 className={classes.loginButton}
                 variant="contained"
                 color="primary"
                 onClick={() => dispatch(loginUser(form))}
               >
                 Log in
-              </Button>
-              <Button
-                className={classes.loginButton}
-                variant="contained"
-                color="primary"
-                onClick={() => dispatch(registerUser(form))}
-              >
-                REG
               </Button>
             </Grid>
           </Grid>

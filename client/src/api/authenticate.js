@@ -1,8 +1,8 @@
 import { getAPIPath, request, setToken } from './core'
 
-export const register = ({ email, password }) => request(
+export const register = ({ email, password, name }) => request(
   getAPIPath('auth/register'),
-  { method: 'POST', data: { email, password } },
+  { method: 'POST', data: { email, password, name } },
   false,
 )
 

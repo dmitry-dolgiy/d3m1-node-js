@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { getAccessToken } from "../store/duck/authenticate";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   page: {
@@ -17,13 +18,16 @@ const HomePage = () => {
   const token = useSelector(getAccessToken)
 
   if (!token) {
-    return <Redirect to="/auth/login" />
+    return <Redirect to="/auth/login"/>
   }
 
   return (
-    <h1>
-      hello
-    </h1>
+    <Grid container alignItems="center" justify="center">
+      <h1>
+        Hello, GUYS!
+      </h1>
+      <h3>Currently this page is in development mode</h3>
+    </Grid>
   );
 }
 
